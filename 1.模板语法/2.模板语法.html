@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        v-model=""      文本输入绑定
+        {{}}            显示data里面的值
+        v-bind:         强制数据绑定 简写：  :
+        v-on:click      绑定事件     简写： @click
+     -->
+    <div class="box">
+        <h2>1.双大括号表达式 | 插值</h2>
+        <input type="text" v-model="msg">
+        <p>原版：{{msg}}</p>
+        <p>使用了转大写代码：{{msg.toUpperCase()}}</p>
+        <p>使用了截取字符串代码：{{msg.slice(0,6)}}</p>
+
+        <h2>2.强制数据绑定</h2>
+        <a href="url">没有加v-bind:</a><br>
+        <a v-bind:href="url">加v-bind:</a><br>
+        <a :href="url">简写:</a><br>
+
+        <h2>3.绑定事件监听</h2>
+        <button v-on:click="test">普通绑定test1</button><br><br>
+        <button @click="test">简写绑定test1</button>
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    // 生成vue实例
+    const vm = new Vue({
+        // 绑定容器
+        el: '.box',	    //绑定了class为box的元素
+        // 绑定数据
+        data: {
+            msg: 'I Will Back!',	//页面可以访问的值，{{msg}} 获取
+            url: 'http://www.4399.com'
+        },
+        // 绑定事件
+        methods: {
+            test() {
+                console.log('text');
+            }
+        },
+    }).$mount('#test')	//他的效果跟el一样，两个写一个就可以了
+
+    setTimeout(() => {
+        vm.msg = 'haha';  //会直接更改data里的msg值
+    }, 1000)
+</script>
+
+</html>
